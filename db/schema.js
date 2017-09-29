@@ -51,7 +51,10 @@ const HouseholdSchema = new Schema({
       type: String,
       required: true
    },*/
-   meals: [MealSchema],
+   meals: {
+      type: [MealSchema],
+      unique: false
+   },
    members: {
       type: [String]
    }

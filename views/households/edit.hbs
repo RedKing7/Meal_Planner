@@ -1,5 +1,5 @@
 <h1>Edit Household</h1>
-<form action="/households/?_method=PUT" method='POST'>
+<form action="/households/{{household._id}}/?_method=PUT" method='POST'>
    <label for="name">Household name:</label>
    <input type="text" name='name' required='true' value='{{household.name}}'>
    <br><br>
