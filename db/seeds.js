@@ -2,16 +2,15 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const Schema = require('./schema.js');
 
-//mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(process.env.MONGODB_URI)
 //seed heroku
-mongoose.connect('mongodb://heroku_tnb0x29x:lvnpvtjtumdlv443fgclnqnp7p@ds155934.mlab.com:55934/heroku_tnb0x29x')
+//mongoose.connect('mongodb://heroku_tnb0x29x:lvnpvtjtumdlv443fgclnqnp7p@ds155934.mlab.com:55934/heroku_tnb0x29x')
 
 const db = mongoose.connection;
 
 db.on('open', () => {
    console.log('database has been connected')
 })
-
 
 const UserModel = Schema.UserModel;
 const HouseholdModel = Schema.HouseholdModel;
@@ -40,7 +39,7 @@ const apartmentOne = new HouseholdModel({
 })
 
 const omelette = new MealModel({
-   name: 'omelette',
+   name: 'Omelette',
    meal: 'Breakfast',
    day: 'Monday',
    ingredients: ['eggs', 'cheese', 'green onions']
@@ -54,10 +53,10 @@ const pbj = new MealModel({
 })
 
 const meatloaf = new MealModel({
-   name: 'meatloaf',
+   name: 'Meatloaf',
    meal: 'Dinner',
    day: 'Wednesday',
-   ingredients: ['hamburger', 'corn', 'peas']
+   ingredients: ['ground beef', 'corn', 'peas']
 })
 
 const users = [rory, apartmentOne, patrick];

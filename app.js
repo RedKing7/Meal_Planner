@@ -24,6 +24,7 @@ db.on('open', () => {
 const index = require('./routes/plan_controller');
 const users = require('./routes/user_controller');
 const meals = require('./routes/meal_controller');
+const households = require('./routes/household_controller');
 
 
 const app = express();
@@ -44,6 +45,7 @@ app.use(methodOverride('_method'))
 app.use('/', index);
 app.use('/users/:userId/meals', meals);
 app.use('/users', users);
+app.use('/households', households);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -27,6 +27,22 @@ router.get('/new', (req, res) => {
    })
 })
 
+//edit
+router.get('/:mealId/edit', (req, res) => {
+   const userId = req.params.userId;
+   const mealId = req.params.mealId;
+
+   Users.findById(userId)
+      .then((user) => {
+         const meal = user.meals.id(mealId);
+         res.render('meals/edit', {
+            meal,
+            ingredients: meal.ingredients.join(', '),
+            userId
+         })
+      })
+})
+
 //delete
 router.get('/:mealId/delete', (req, res) => {
    const userId = req.params.userId;
@@ -45,7 +61,7 @@ router.get('/:mealId/delete', (req, res) => {
    })
 })
 
-//put
+//create put
 router.post('/', (req, res) => {
    const userId = req.params.userId;
    const newMeal = req.body;
