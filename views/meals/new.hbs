@@ -1,0 +1,42 @@
+<h1>New Meal</h1>
+<form action="/users/{{userId}}/meals" method='POST'>
+
+   <label for="name">Name:</label>
+   <input type="text" name='name' required='true'>
+
+   <br>
+
+   <label for="meal">Meal:</label>
+   <select name="meal" required='true'>
+      <option value="Breakfast">Breakfast</option>
+      <option value="Lunch">Lunch</option>
+      <option value="Dinner">Dinner</option>
+   </select>
+
+   <br>
+
+   <label for="day">Day:</label>
+   <select name="day" required='true'>
+      <option value="Sunday">Sunday</option>
+      <option value="Monday">Monday</option>
+      <option value="Tuesday">Tuesday</option>
+      <option value="Wednesday">Wednesday</option>
+      <option value="Thursday">Thursday</option>
+      <option value="Friday">Friday</option>
+      <option value="Saturday">Saturday</option>
+   </select>
+
+   <br>
+
+   <label for="ingredients">Ingredients:</label>
+   <input type="text" name="ingredients"><br>
+   <label>(seperate with a comma and space)</label>
+
+   <br>
+
+   {{!-- <label for='chef'>Chef:</label> --}}
+   {{!-- <input type='text' name='chef'> --}}
+   
+   <button type='submit'>Add Meal</button>
+
+</form>

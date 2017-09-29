@@ -1,8 +1,25 @@
 body {
-  padding: 50px;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: rgba(255, 255, 255, 0.8);
+  padding: 0px;
+  margin: 0px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: black;
+  height: 50px;
+  border-bottom: rgba(255, 255, 255, 0.8) solid;
+  border-top: rgba(255, 255, 255, 0.8) solid;
+}
+
+div{
+  margin: 30px;
 }

@@ -4,7 +4,7 @@ const Schema = require('./schema.js');
 
 mongoose.connect(process.env.MONGODB_URI)
 //seed heroku
-//mongoose.connect('')
+//mongoose.connect('mongodb://heroku_tnb0x29x:lvnpvtjtumdlv443fgclnqnp7p@ds155934.mlab.com:55934/heroku_tnb0x29x')
 
 const db = mongoose.connection;
 
@@ -25,7 +25,13 @@ HouseholdModel.remove({}, (err) => {
 })
 
 const rory = new UserModel({
-   username: 'RJ97'
+   username: 'RJ123',
+   name: 'Rory'
+})
+
+const patrick = new UserModel({
+   username: 'PJ321',
+   name: 'Patrick'
 })
 
 const apartmentOne = new HouseholdModel({
@@ -54,7 +60,7 @@ const meatloaf = new MealModel({
    ingredients: ['hamburger', 'corn', 'peas']
 })
 
-const users = [rory, apartmentOne];
+const users = [rory, apartmentOne, patrick];
 const meals = [omelette, pbj, meatloaf];
 
 users.forEach((user) => {

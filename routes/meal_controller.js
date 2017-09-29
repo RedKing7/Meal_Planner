@@ -1,0 +1,51 @@
+var express = require('express');
+var router = express.Router({mergeParams: true});
+
+const Schema = require('../db/schema');
+
+const Users = Schema.UserModel;
+
+//index
+router.get('/', (req, res) => {
+   const userId = req.params.userId;
+   Users.findById(userId)
+      .then((user) => {
+         console.log(user);
+         res.render('meals/show', {
+            user: user
+         });
+      })
+      .catch((err) => { console.log(err) })
+})
+
+//create
+router.get('/new', (req, res) => {
+   const userId = req.params.userId;
+   console.log(userId);
+   res.render('meals/new', {
+      userId
+   })
+})
+
+//put
+router.post('/', (req, res) => {
+   const userId = req.params.userId;
+   const newMeal = req.body;
+
+   Users.findById(userId)
+      .then((user) => {
+         //split ingredients string into an array
+         let ingredients = newMeal.ingredients;
+         ingredients = ingredients.split(', ');
+         newMeal.ingredients = ingredients;
+
+         user.meals.push(newMeal)
+         return user.save()
+      })
+      .then((user) => {
+         console.log(user._id);
+         res.redirect(`/users/${user._id}/meals`);
+      })
+})
+
+module.exports = router;

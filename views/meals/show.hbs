@@ -1,0 +1,22 @@
+<h1>{{user.name}}</h1>
+<a href="/users/{{user._id}}/meals/new">Add</a>
+<hr>
+{{#each user.meals}}
+<div>
+   <h1>{{this.name}} for {{this.meal}} on {{this.day}}</h1>
+   {{#if this.chef}}
+      <h2>Cooked by {{this.chef}}</h2>
+   {{/if}}
+   Ingredients:
+   <ul>
+      {{#each this.ingredients}}
+         <li>
+            {{this}}
+         </li>
+      {{/each}}
+   </ul>
+   <a href="/">Edit</a>
+   <a href="/">Remove</a>
+</div>
+<hr>
+{{/each}}
