@@ -27,7 +27,7 @@ const MealSchema = new Schema({
 const UserSchema = new Schema({
    username: {
       type: String,
-      unique: true,
+      //unique: true,
       required: true
    },
    name:{
@@ -44,7 +44,7 @@ const UserSchema = new Schema({
 const HouseholdSchema = new Schema({
    name: {
       type: String,
-      unique: true,
+      //unique: true,
       required: true
    },
    /*password: {
