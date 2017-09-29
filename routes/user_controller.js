@@ -20,6 +20,20 @@ router.get('/new', (req, res) => {
    res.render('users/new')
 })
 
+//show
+router.get('/:userId', (req, res)=>{
+   const userId = req.params.userId;
+   Users.findById(userId)
+      .then((user)=>{
+         res.render('users/show', {
+            user
+         });
+      })
+      .catch((err)=>{
+         console.log(err);
+      })
+})
+
 //create put
 router.post('/', (req, res) => {
    const newUser = req.body;
