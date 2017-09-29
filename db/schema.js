@@ -42,7 +42,7 @@ const UserSchema = new Schema({
 })
 
 const HouseholdSchema = new Schema({
-   username: {
+   name: {
       type: String,
       unique: true,
       required: true

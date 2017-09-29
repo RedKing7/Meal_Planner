@@ -21,15 +21,15 @@ router.get('/new', (req, res) => {
 })
 
 //show
-router.get('/:userId', (req, res)=>{
+router.get('/:userId', (req, res) => {
    const userId = req.params.userId;
    Users.findById(userId)
-      .then((user)=>{
+      .then((user) => {
          res.render('users/show', {
             user
          });
       })
-      .catch((err)=>{
+      .catch((err) => {
          console.log(err);
       })
 })
@@ -50,8 +50,32 @@ router.post('/', (req, res) => {
 })
 
 //edit
+router.get('/:userId/edit', (req, res) => {
+   let userId = req.params.userId;
+   Users.findById(userId)
+      .then((user) => {
+         res.render('users/edit', {
+            user
+         });
+      })
+      .catch((err) => {
+         console.log(err);
+      })
+})
 
 //edit put
+router.put('/:userId', (req, res) => {
+   const updatedUser = req.body;
+   const userId = req.params.userId;
+
+   Users.findOneAndUpdate({ _id: userId }, updatedUser, { new: true })
+      .then(() => {
+         res.redirect(`/users/${userId}`);
+      })
+      .catch((err) => {
+         console.log(err)
+      })
+})
 
 //delete
 router.get('/:userId/delete', (req, res) => {

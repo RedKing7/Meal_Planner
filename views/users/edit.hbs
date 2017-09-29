@@ -1,0 +1,12 @@
+<h1>Edit User</h1>
+<form action="/users/{{user._id}}?_method=PUT" method='POST'>
+   <label for="name">Name: </label>
+   <input type="text" name='name' value="{{user.name}}">
+   <br>
+   <label for="username">Username: </label>
+   <input type="text" name='username' value="{{user.username}}">
+   <br>
+   <button type='submit'>Update</button>
+</form>
+<br><br>
+<a href="/users/{{user._id}}">Cancel</a>

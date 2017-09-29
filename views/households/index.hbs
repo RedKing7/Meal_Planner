@@ -1,0 +1,10 @@
+<h1>Households</h1>
+<hr>
+{{#each households}}
+<div>
+   <h1><a href='/households/{{this._id}}/'>{{this.name}}</a></h1>
+   <a href="/households/{{this._id}}/meals">{{this.name}}'s Meals</a>
+   <a href="/households/{{this._id}}/delete">Delete Household</a>
+</div>
+<hr>
+{{/each}}

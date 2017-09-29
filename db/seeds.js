@@ -2,6 +2,7 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const Schema = require('./schema.js');
 
+//seed local
 mongoose.connect(process.env.MONGODB_URI)
 //seed heroku
 //mongoose.connect('mongodb://heroku_tnb0x29x:lvnpvtjtumdlv443fgclnqnp7p@ds155934.mlab.com:55934/heroku_tnb0x29x')
@@ -34,7 +35,7 @@ const patrick = new UserModel({
 })
 
 const apartmentOne = new HouseholdModel({
-   username: 'Apartment 1',
+   name: 'Apartment 1',
    members: ['Rory', 'Patrick']
 })
 
@@ -68,7 +69,7 @@ users.forEach((user) => {
 
    user.save()
       .then((user) => {
-         console.log(user.username + '\'s Meals saved')
+         console.log(user.name + '\'s Meals saved')
       })
       .catch((error) => {
          console.log(error);
