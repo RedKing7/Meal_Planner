@@ -13,17 +13,17 @@
    </ul>
 
 {{#if isHousehold}}
-   <a href="/households/{{userId}}/{{isHousehold}}/meals/{{meal._id}}/edit">Edit</a>
-   <a href="/households/{{userId}}/{{isHousehold}}/meals/{{meal._id}}/delete">Remove</a>
+   <a href="/households/{{userId}}/true/meals/{{meal._id}}/edit">Edit</a>
+   <a href="/households/{{userId}}/true/meals/{{meal._id}}/delete">Remove</a>
 </div>
    <hr>
-   <a href="/households/{{userId}}/{{isHousehold}}/meals">back</a>
+   <a href="/households/{{userId}}/true/meals">back</a>
 
 {{else}}
 
-   <a href="/users/{{userId}}/{{isHousehold}}/meals/{{meal._id}}/edit">Edit</a>
-   <a href="/users/{{userId}}/{{isHousehold}}/meals/{{meal._id}}/delete">Remove</a>
+   <a href="/users/{{userId}}/false/meals/{{meal._id}}/edit">Edit</a>
+   <a href="/users/{{userId}}/false/meals/{{meal._id}}/delete">Remove</a>
 </div>
    <hr>
-   <a href="/users/{{userId}}/{{isHousehold}}/meals">back</a>
+   <a href="/users/{{userId}}/false/meals">back</a>
 {{/if}}

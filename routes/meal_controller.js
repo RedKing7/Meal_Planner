@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
       const isHousehold = ('true' === req.params.isHousehold);
       const userId = req.params.userId;
       if(isHousehold){
-            Households.findById(userId)
+         Households.findById(userId)
             .then((user) => {
                   res.render('meals/show', {
                   user,
@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
             })
             .catch((err) => { console.log(err) })
       } else {
-            Users.findById(userId)
+         Users.findById(userId)
             .then((user) => {
                   res.render('meals/show', {
                   user,
@@ -49,16 +49,33 @@ router.get('/:mealId', (req, res) => {
    const userId = req.params.userId;
    const mealId = req.params.mealId;
 
-   Users.findById(userId)
-      .then((user)=>{
-         const meal = user.meals.id(mealId);
-         res.render('meals/view', {
-            meal,
-            ingredients: meal.ingredients,
-            userId
-         })
-      })
-      .catch((err)=>{console.log(err)})
+   console.log(typeof(req.params.isHousehold), req.params.isHousehold);
+   console.log(typeof(isHousehold), isHousehold);
+   if(isHousehold){
+      Households.findById(userId)
+            .then((user)=>{
+            const meal = user.meals.id(mealId);
+            res.render('meals/view', {
+                  meal,
+                  ingredients: meal.ingredients,
+                  userId,
+                  isHousehold
+            })
+            })
+            .catch((err)=>{console.log(err)})
+   } else {
+      Users.findById(userId)
+            .then((user)=>{
+                  const meal = user.meals.id(mealId);
+                  res.render('meals/view', {
+                  meal,
+                  ingredients: meal.ingredients,
+                  userId,
+                  isHousehold
+                  })
+            })
+            .catch((err)=>{console.log(err)})
+   }
 })
 
 //create put
@@ -79,7 +96,7 @@ router.post('/', (req, res) => {
          return user.save()
       })
       .then((user) => {
-         res.redirect(`/users/${user._id}/meals`);
+         res.redirect(`/users/${user._id}/meals`);//!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       })
 })
 

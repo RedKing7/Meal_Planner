@@ -1,9 +1,12 @@
 <h1>{{user.name}}</h1>
+<h1>{{isHousehold}}</h1>
 
 {{#if isHousehold}}
-   <a href="/households/{{user._id}}/{{isHousehold}}/meals/new">Add</a>
+   True
+   <a href="/households/{{user._id}}/true/meals/new">Add</a>
 {{else}}
-   <a href="/users/{{user._id}}/{{isHousehold}}/meals/new">Add</a>
+   False
+   <a href="/users/{{user._id}}/false/meals/new">Add</a>
 {{/if}}
 
 <hr>
@@ -25,12 +28,12 @@
       {{/each}}
    </ul>
 
-   {{#if isHousehold}}
-      <a href="/households/{{../user._id}}/{{isHousehold}}/meals/{{this._id}}">View</a>
-      <a href="/households/{{../user._id}}/{{isHousehold}}/meals/{{this._id}}/delete">Remove</a>
+   {{#if ../isHousehold}}
+      <a href="/households/{{../user._id}}/true/meals/{{this._id}}">View</a>
+      <a href="/households/{{../user._id}}/true/meals/{{this._id}}/delete">Remove</a>
    {{else}}
-      <a href="/users/{{../user._id}}/{{isHousehold}}/meals/{{this._id}}">View</a>
-      <a href="/users/{{../user._id}}/{{isHousehold}}/meals/{{this._id}}/delete">Remove</a>
+      <a href="/users/{{../user._id}}/false/meals/{{this._id}}">View</a>
+      <a href="/users/{{../user._id}}/false/meals/{{this._id}}/delete">Remove</a>
    {{/if}}
 
 </div>
@@ -38,7 +41,9 @@
 {{/each}}
 <br><br>
 {{#if isHousehold}}
+True
 <a href="/households/">Back to households</a>
 {{else}}
+False
 <a href="/users/">Back to users</a>
 {{/if}}
