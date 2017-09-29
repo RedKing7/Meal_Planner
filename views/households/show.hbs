@@ -1,1 +1,30 @@
-<h1>{{household.name}}</h1>
+<h3>Name: {{household.name}}</h3>
+
+{{#if household.members}}
+   <label>Members: </label>
+   <ul>
+      {{#each household.members}}
+         <li>{{this}}</li>
+      {{/each}}
+   </ul>
+{{else}}
+   <p>No members yet</p>
+{{/if}}
+{{!-- <a href="">Add members</a> --}}
+
+{{#if household.meals}}
+<label>Meals: </label>
+<ul>
+   {{#each household.meals}}
+      <li>{{this.name}} on {{this.day}}{{#if this.chef}} cooked by {{this.chef}}.{{/if}}</li>
+   {{/each}}
+</ul>
+{{else}}
+   <p>No meals yet</p>
+{{/if}}
+
+<a href="/households/{{household._id}}/edit/">Edit</a>
+
+<br><br>
+
+<a href="/households/">Back to households</a>

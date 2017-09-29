@@ -1,15 +1,15 @@
 <h1>Edit Household</h1>
 <form action="/households/?_method=PUT" method='POST'>
    <label for="name">Household name:</label>
-   <input type="text" name='name' required='true'>
+   <input type="text" name='name' required='true' value='{{household.name}}'>
    <br><br>
 
    <label for='members'>Member names:</label><br>
-   <textarea cols="50" rows="3" type='text' name='ingredients'></textarea>
+   <textarea cols="50" rows="3" type='text' name='ingredients'>{{members}}</textarea>
    <br>
    <label>(seperate with a comma and space)</label>
 
    <br><br>
 
-   <button type='submit'>Create User</button>
+   <button type='submit'>Submit changes</button>
 </form>
