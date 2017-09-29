@@ -5,7 +5,7 @@ const Schema = require('../db/schema');
 
 const Users = Schema.UserModel;
 
-/* GET home page. */
+// index
 router.get('/', (req, res) => {
    Users.find({})
       .then((users) => {
@@ -14,5 +14,18 @@ router.get('/', (req, res) => {
          })
       })
 });
+
+
+//delete
+router.get('/:userId/delete', (req, res) => {
+   const userId = req.params.userId;
+   Users.findByIdAndRemove(userId)
+      .then((user) => {
+         res.redirect('/users/');
+      })
+      .catch((err) => {
+         console.log(err);
+      })
+})
 
 module.exports = router;

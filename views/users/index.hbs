@@ -3,8 +3,8 @@
 {{#each users}}
 <div>
    <h1>{{this.name}}</h1>
-   {{!-- <a href='/users/{{this.username}}/meals'>{{this.username}}'s Meals</a> --}}
    <a href="/users/{{this._id}}/meals">{{this.name}}'s Meals</a>
+   <a href="/users/{{this._id}}/delete">Delete User</a>
 </div>
 <hr>
 {{/each}}
