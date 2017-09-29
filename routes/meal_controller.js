@@ -17,6 +17,14 @@ router.get('/', (req, res) => {
       .catch((err) => { console.log(err) })
 })
 
+//create
+router.get('/new', (req, res) => {
+      const userId = req.params.userId;
+      res.render('meals/new', {
+            userId
+      })
+})
+
 //view
 router.get('/:mealId', (req, res) => {
    const userId = req.params.userId;
@@ -25,7 +33,6 @@ router.get('/:mealId', (req, res) => {
    Users.findById(userId)
       .then((user)=>{
          const meal = user.meals.id(mealId);
-         console.log(meal.ingredients);
          res.render('meals/view', {
             meal,
             ingredients: meal.ingredients,
@@ -35,12 +42,24 @@ router.get('/:mealId', (req, res) => {
       .catch((err)=>{console.log(err)})
 })
 
-//create
-router.get('/new', (req, res) => {
+//create put
+router.post('/', (req, res) => {
    const userId = req.params.userId;
-   res.render('meals/new', {
-      userId
-   })
+   const newMeal = req.body;
+
+   Users.findById(userId)
+      .then((user) => {
+         //split ingredients string into an array
+         let ingredients = newMeal.ingredients;
+         ingredients = ingredients.split(', ');
+         newMeal.ingredients = ingredients;
+
+         user.meals.push(newMeal)
+         return user.save()
+      })
+      .then((user) => {
+         res.redirect(`/users/${user._id}/meals`);
+      })
 })
 
 //edit
@@ -100,26 +119,6 @@ router.get('/:mealId/delete', (req, res) => {
       })
       .catch((err) => {
          console.log(err);
-      })
-})
-
-//create put
-router.post('/', (req, res) => {
-   const userId = req.params.userId;
-   const newMeal = req.body;
-
-   Users.findById(userId)
-      .then((user) => {
-         //split ingredients string into an array
-         let ingredients = newMeal.ingredients;
-         ingredients = ingredients.split(', ');
-         newMeal.ingredients = ingredients;
-
-         user.meals.push(newMeal)
-         return user.save()
-      })
-      .then((user) => {
-         res.redirect(`/users/${user._id}/meals`);
       })
 })
 

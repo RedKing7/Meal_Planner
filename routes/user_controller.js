@@ -15,6 +15,29 @@ router.get('/', (req, res) => {
       })
 });
 
+//create
+router.get('/new', (req, res) => {
+   res.render('users/new')
+})
+
+//create put
+router.post('/', (req, res) => {
+   const newUser = req.body;
+   Users.create({
+      username: newUser.username,
+      name: newUser.name
+   })
+      .then(() => {
+         res.redirect('/users');
+      })
+      .catch((err) => {
+         console.log(err);
+      })
+})
+
+//edit
+
+//edit put
 
 //delete
 router.get('/:userId/delete', (req, res) => {
