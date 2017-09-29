@@ -66,12 +66,14 @@ router.get('/:householdId/edit', (req, res) => {
 
 //edit put
 router.put('/:householdId', (req, res) => {
-  const updatedhousehold = req.body;
+  const updatedHousehold = req.body;
   const householdId = req.params.householdId;
 
-  updatedhousehold.members = updatedhousehold.members.split(', ');
+  console.log(updatedHousehold)
 
-  Households.findOneAndUpdate({ _id: householdId }, updatedhousehold, { new: true })
+  updatedHousehold.members = updatedHousehold.members.split(', ');
+
+  Households.findOneAndUpdate({ _id: householdId }, updatedHousehold, { new: true })
     .then(() => {
       res.redirect(`/households/${householdId}`);
     })
