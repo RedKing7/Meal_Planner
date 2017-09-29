@@ -10,7 +10,6 @@ router.get('/', (req, res) => {
    const userId = req.params.userId;
    Users.findById(userId)
       .then((user) => {
-         console.log(user);
          res.render('meals/show', {
             user: user
          });
@@ -18,10 +17,27 @@ router.get('/', (req, res) => {
       .catch((err) => { console.log(err) })
 })
 
+//view
+router.get('/:mealId', (req, res) => {
+   const userId = req.params.userId;
+   const mealId = req.params.mealId;
+
+   Users.findById(userId)
+      .then((user)=>{
+         const meal = user.meals.id(mealId);
+         console.log(meal.ingredients);
+         res.render('meals/view', {
+            meal,
+            ingredients: meal.ingredients,
+            userId
+         })
+      })
+      .catch((err)=>{console.log(err)})
+})
+
 //create
 router.get('/new', (req, res) => {
    const userId = req.params.userId;
-   console.log(userId);
    res.render('meals/new', {
       userId
    })
@@ -43,22 +59,48 @@ router.get('/:mealId/edit', (req, res) => {
       })
 })
 
+//edit put
+router.put('/:mealId', (req, res) => {
+   const userId = req.params.userId;
+   const mealId = req.params.mealId;
+   const updatedMeal = req.body;
+
+   Users.findById(userId)
+      .then((user) => {
+         const meal = user.meals.id(mealId);
+
+         meal.name = updatedMeal.name
+         meal.meal = updatedMeal.meal
+         meal.day = updatedMeal.day
+         meal.ingredients = updatedMeal.ingredients.split(', ')
+         meal.chef = updatedMeal.chef
+
+         return user.save();
+      })
+      .then(() => {
+         res.redirect(`/users/${userId}/meals/${mealId}`)
+      })
+      .catch((err) => {
+         console.log(err);
+      })
+})
+
 //delete
 router.get('/:mealId/delete', (req, res) => {
    const userId = req.params.userId;
    const mealId = req.params.mealId;
 
    Users.findById(userId)
-   .then((user) => {
-      const meal = user.meals.id(mealId).remove(); //nice and easy
-      return user.save(); //must do this, or change wont be saved
-   })
-   .then(() => {
-      res.redirect(`/users/${userId}/meals`)
-   })
-   .catch((err) => {
-      console.log(err);
-   })
+      .then((user) => {
+         const meal = user.meals.id(mealId).remove(); //nice and easy
+         return user.save(); //must do this, or change wont be saved
+      })
+      .then(() => {
+         res.redirect(`/users/${userId}/meals`)
+      })
+      .catch((err) => {
+         console.log(err);
+      })
 })
 
 //create put
@@ -77,7 +119,6 @@ router.post('/', (req, res) => {
          return user.save()
       })
       .then((user) => {
-         console.log(user._id);
          res.redirect(`/users/${user._id}/meals`);
       })
 })

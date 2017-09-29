@@ -1,0 +1,18 @@
+<div>
+   <h1>{{meal.name}} for {{meal.meal}} on {{meal.day}}</h1>
+   {{#if meal.chef}}
+      <h2>Cooked by {{meal.chef}}</h2>
+   {{/if}}
+   Ingredients:
+   <ul>
+      {{#each ingredients}}
+         <li>
+            {{this}}
+         </li>
+      {{/each}}
+   </ul>
+   <a href="/users/{{userId}}/meals/{{meal._id}}/edit">Edit</a>
+   <a href="/users/{{userId}}/meals/{{meal._id}}/delete">Remove</a>
+</div>
+<hr>
+<a href="/users/{{userId}}/meals">back</a>
