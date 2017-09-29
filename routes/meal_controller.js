@@ -1,5 +1,5 @@
 var express = require('express');
-var router = express.Router({mergeParams: true});
+var router = express.Router({ mergeParams: true });
 
 const Schema = require('../db/schema');
 
@@ -24,6 +24,24 @@ router.get('/new', (req, res) => {
    console.log(userId);
    res.render('meals/new', {
       userId
+   })
+})
+
+//delete
+router.get('/:mealId/delete', (req, res) => {
+   const userId = req.params.userId;
+   const mealId = req.params.mealId;
+
+   Users.findById(userId)
+   .then((user) => {
+      const meal = user.meals.id(mealId).remove(); //nice and easy
+      return user.save(); //must do this, or change wont be saved
+   })
+   .then(() => {
+      res.redirect(`/users/${userId}/meals`)
+   })
+   .catch((err) => {
+      console.log(err);
    })
 })
 

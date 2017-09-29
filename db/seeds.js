@@ -2,9 +2,9 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const Schema = require('./schema.js');
 
-mongoose.connect(process.env.MONGODB_URI)
+//mongoose.connect(process.env.MONGODB_URI)
 //seed heroku
-//mongoose.connect('mongodb://heroku_tnb0x29x:lvnpvtjtumdlv443fgclnqnp7p@ds155934.mlab.com:55934/heroku_tnb0x29x')
+mongoose.connect('mongodb://heroku_tnb0x29x:lvnpvtjtumdlv443fgclnqnp7p@ds155934.mlab.com:55934/heroku_tnb0x29x')
 
 const db = mongoose.connection;
 
