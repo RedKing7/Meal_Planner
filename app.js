@@ -43,9 +43,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'))
 
 app.use('/', index);
-app.use('/users/:userId/meals', meals);
+app.use('/users/:userId/:isHousehold/meals', meals);
 app.use('/users', users);
 app.use('/households', households);
+app.use('/households/:userId/:isHousehold/meals', meals)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

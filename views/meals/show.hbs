@@ -1,7 +1,16 @@
 <h1>{{user.name}}</h1>
-<a href="/users/{{user._id}}/meals/new">Add</a>
+
+{{#if isHousehold}}
+   <a href="/households/{{user._id}}/{{isHousehold}}/meals/new">Add</a>
+{{else}}
+   <a href="/users/{{user._id}}/{{isHousehold}}/meals/new">Add</a>
+{{/if}}
+
 <hr>
+
+
 {{#each user.meals}}
+
 <div>
    <h1>{{this.name}} for {{this.meal}} on {{this.day}}</h1>
    {{#if this.chef}}
@@ -15,10 +24,21 @@
          </li>
       {{/each}}
    </ul>
-   <a href="/users/{{../user._id}}/meals/{{this._id}}">View</a>
-   <a href="/users/{{../user._id}}/meals/{{this._id}}/delete">Remove</a>
+
+   {{#if isHousehold}}
+      <a href="/households/{{../user._id}}/{{isHousehold}}/meals/{{this._id}}">View</a>
+      <a href="/households/{{../user._id}}/{{isHousehold}}/meals/{{this._id}}/delete">Remove</a>
+   {{else}}
+      <a href="/users/{{../user._id}}/{{isHousehold}}/meals/{{this._id}}">View</a>
+      <a href="/users/{{../user._id}}/{{isHousehold}}/meals/{{this._id}}/delete">Remove</a>
+   {{/if}}
+
 </div>
 <hr>
 {{/each}}
 <br><br>
+{{#if isHousehold}}
+<a href="/households/">Back to households</a>
+{{else}}
 <a href="/users/">Back to users</a>
+{{/if}}

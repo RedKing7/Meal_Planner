@@ -1,5 +1,9 @@
 <h1>New Meal</h1>
-<form action='/users/{{userId}}/meals' method='POST'>
+{{#if isHousehold}}
+      <form action='/households/{{userId}}/true/meals' method='POST'>
+{{else}}
+      <form action='/users/{{userId}}/false/meals' method='POST'>
+{{/if}}
 
    <label for='name'>Name:</label>
    <input type='text' name='name' required='true'>

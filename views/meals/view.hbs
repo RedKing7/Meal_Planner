@@ -11,8 +11,19 @@
          </li>
       {{/each}}
    </ul>
-   <a href="/users/{{userId}}/meals/{{meal._id}}/edit">Edit</a>
-   <a href="/users/{{userId}}/meals/{{meal._id}}/delete">Remove</a>
+
+{{#if isHousehold}}
+   <a href="/households/{{userId}}/{{isHousehold}}/meals/{{meal._id}}/edit">Edit</a>
+   <a href="/households/{{userId}}/{{isHousehold}}/meals/{{meal._id}}/delete">Remove</a>
 </div>
-<hr>
-<a href="/users/{{userId}}/meals">back</a>
+   <hr>
+   <a href="/households/{{userId}}/{{isHousehold}}/meals">back</a>
+
+{{else}}
+
+   <a href="/users/{{userId}}/{{isHousehold}}/meals/{{meal._id}}/edit">Edit</a>
+   <a href="/users/{{userId}}/{{isHousehold}}/meals/{{meal._id}}/delete">Remove</a>
+</div>
+   <hr>
+   <a href="/users/{{userId}}/{{isHousehold}}/meals">back</a>
+{{/if}}

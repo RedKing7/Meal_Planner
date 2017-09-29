@@ -4,29 +4,48 @@ var router = express.Router({ mergeParams: true });
 const Schema = require('../db/schema');
 
 const Users = Schema.UserModel;
+const Households = Schema.HouseholdModel;
 
 //index
 router.get('/', (req, res) => {
-   const userId = req.params.userId;
-   Users.findById(userId)
-      .then((user) => {
-         res.render('meals/show', {
-            user: user
-         });
-      })
-      .catch((err) => { console.log(err) })
+      const isHousehold = ('true' === req.params.isHousehold);
+      const userId = req.params.userId;
+      if(isHousehold){
+            Households.findById(userId)
+            .then((user) => {
+                  res.render('meals/show', {
+                  user,
+                  isHousehold
+                  });
+            })
+            .catch((err) => { console.log(err) })
+      } else {
+            Users.findById(userId)
+            .then((user) => {
+                  res.render('meals/show', {
+                  user,
+                  isHousehold
+                  });
+            })
+            .catch((err) => { console.log(err) })
+      }
 })
 
 //create
 router.get('/new', (req, res) => {
+      const isHousehold = ('true' === req.params.isHousehold);
       const userId = req.params.userId;
+
       res.render('meals/new', {
-            userId
+            userId,
+            isHousehold
       })
 })
 
 //view
 router.get('/:mealId', (req, res) => {
+   const isHousehold = ('true' === req.params.isHousehold);
+
    const userId = req.params.userId;
    const mealId = req.params.mealId;
 
@@ -44,6 +63,8 @@ router.get('/:mealId', (req, res) => {
 
 //create put
 router.post('/', (req, res) => {
+      const isHousehold = ('true' === req.params.isHousehold);
+
    const userId = req.params.userId;
    const newMeal = req.body;
 
@@ -64,6 +85,8 @@ router.post('/', (req, res) => {
 
 //edit
 router.get('/:mealId/edit', (req, res) => {
+      const isHousehold = ('true' === req.params.isHousehold);
+
    const userId = req.params.userId;
    const mealId = req.params.mealId;
 
@@ -80,6 +103,8 @@ router.get('/:mealId/edit', (req, res) => {
 
 //edit put
 router.put('/:mealId', (req, res) => {
+      const isHousehold = ('true' === req.params.isHousehold);
+   
    const userId = req.params.userId;
    const mealId = req.params.mealId;
    const updatedMeal = req.body;
@@ -106,6 +131,8 @@ router.put('/:mealId', (req, res) => {
 
 //delete
 router.get('/:mealId/delete', (req, res) => {
+      const isHousehold = ('true' === req.params.isHousehold);
+   
    const userId = req.params.userId;
    const mealId = req.params.mealId;
 

@@ -1,6 +1,10 @@
 <h1>Edit Meal</h1>
 <hr>
-<form action='/users/{{userId}}/meals/{{meal._id}}?_method=PUT' method='POST'>
+{{#if isHousehold}}
+      <form action='/households/{{userId}}/true/meals/{{meal._id}}?_method=PUT' method='POST'>
+{{else}}
+      <form action='/users/{{userId}}/false/meals/{{meal._id}}?_method=PUT' method='POST'>
+{{/if}}
 
    <label for='name'>Name:</label>
    <input type='text' name='name' required='true' value='{{meal.name}}'>
@@ -45,4 +49,8 @@
 </form>
 <hr>
 
-<a href="/users/{{userId}}/meals/">Back</a>
+{{#if isHousehold}}
+<a href="/households/{{userId}}/{{isHousehold}}/meals/">Back</a>
+{{else}}
+<a href="/users/{{userId}}/{{isHousehold}}/meals/">Back</a>
+{{/if}}
