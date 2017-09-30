@@ -35,11 +35,21 @@ router.get('/', (req, res) => {
 router.get('/new', (req, res) => {
       const isHousehold = ('true' === req.params.isHousehold);
       const userId = req.params.userId;
-
-      res.render('meals/new', {
-            userId,
-            isHousehold
-      })
+      if(isHousehold){
+            Households.findById(userId)
+                  .then((user)=>{
+                        res.render('meals/new', {
+                              userId,
+                              isHousehold,
+                              members: user.members
+                        })
+                  })
+      } else {
+            res.render('meals/new', {
+                  userId,
+                  isHousehold
+            })
+      }
 })
 
 //view
@@ -120,15 +130,30 @@ router.get('/:mealId/edit', (req, res) => {
       const userId = req.params.userId;
       const mealId = req.params.mealId;
 
-      Users.findById(userId)
+      if(isHousehold){
+            Households.findById(userId)
             .then((user) => {
                   const meal = user.meals.id(mealId);
                   res.render('meals/edit', {
                         meal,
                         ingredients: meal.ingredients.join(', '),
-                        userId
+                        userId,
+                        isHousehold,
+                        user
                   })
             })
+      }else{
+            Users.findById(userId)
+                  .then((user) => {
+                        const meal = user.meals.id(mealId);
+                        res.render('meals/edit', {
+                              meal,
+                              ingredients: meal.ingredients.join(', '),
+                              userId,
+                              isHousehold
+                        })
+                  })
+      }
 })
 
 //edit put
@@ -139,7 +164,8 @@ router.put('/:mealId', (req, res) => {
       const mealId = req.params.mealId;
       const updatedMeal = req.body;
 
-      Users.findById(userId)
+      if(isHousehold){
+         Households.findById(userId)
             .then((user) => {
                   const meal = user.meals.id(mealId);
 
@@ -152,11 +178,31 @@ router.put('/:mealId', (req, res) => {
                   return user.save();
             })
             .then(() => {
-                  res.redirect(`/users/${userId}/meals/${mealId}`)
+                  res.redirect(`/households/${userId}/true/meals/${mealId}`)
             })
             .catch((err) => {
                   console.log(err);
             })
+      } else {
+            Users.findById(userId)
+                  .then((user) => {
+                        const meal = user.meals.id(mealId);
+      
+                        meal.name = updatedMeal.name
+                        meal.meal = updatedMeal.meal
+                        meal.day = updatedMeal.day
+                        meal.ingredients = updatedMeal.ingredients.split(', ')
+                        meal.chef = updatedMeal.chef
+      
+                        return user.save();
+                  })
+                  .then(() => {
+                        res.redirect(`/users/${userId}/false/meals/${mealId}`)
+                  })
+                  .catch((err) => {
+                        console.log(err);
+                  })
+      }
 })
 
 //delete

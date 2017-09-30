@@ -39,10 +39,22 @@
 
    <br><br>
 
-   {{!-- <label for='chef'>Chef:</label> --}}
-   {{!-- <input type='text' name='chef'> --}}
+{{#if isHousehold}}
+   <label for='chef'>Chef:</label>
+   <select name='chef'>
+         {{#each members}}
+            <option value="{{this}}">{{this}}</option>
+         {{/each}}
+   </select>
+{{/if}}
    
    <button type='submit'>Add Meal</button>
 
 
 </form>
+<hr>
+{{#if isHousehold}}
+<a href="/households/{{userId}}/true/meals/">Back</a>
+{{else}}
+<a href="/users/{{userId}}/false/meals/">Back</a>
+{{/if}}

@@ -40,8 +40,14 @@
 
    <br><br>
 
-   {{!-- <label for='chef'>Chef:</label> --}}
-   {{!-- <input type='text' name='chef'> --}}
+{{#if isHousehold}}
+   <label for='chef'>Chef:</label>
+   <select name='chef'>
+         {{#each user.members}}
+            <option value="{{this}}">{{this}}</option>
+         {{/each}}
+   </select>
+{{/if}}
    
    <button type='submit'>Edit Meal</button>
 
