@@ -20,6 +20,7 @@ In this repo, saved as [Wireframe.pdf](/Wireframe.pdf?raw=true)
 #### Built using
 - HTML5
 - CSS
+- Handlebars
 - Node.js
 - Express.js
 - MongoDB.js
