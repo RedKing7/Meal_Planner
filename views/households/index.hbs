@@ -3,8 +3,9 @@
 {{#each households}}
 <div>
    <h1><a href='/households/{{this._id}}/'>{{this.name}}</a></h1>
-   <a href="/households/{{this._id}}/true/meals">{{this.name}}'s Meals</a>
-   <a href="/households/{{this._id}}/delete">Delete Household</a>
+   <h2><a href="/households/{{this._id}}/true/meals">{{this.name}}'s Meals</a></h2>
+   <h4><a href="/households/{{this._id}}/delete">Delete Household</a></h4>
 </div>
 <hr>
 {{/each}}
+<h3><a href="/households/new">Create household</a></h3>

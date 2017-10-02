@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
       if (isHousehold) {
             Households.findById(userId)
                   .then((user) => {
-                        res.render('meals/show', {
+                        res.render('meals/index', {
                               user,
                               isHousehold
                         });
@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
       } else {
             Users.findById(userId)
                   .then((user) => {
-                        res.render('meals/show', {
+                        res.render('meals/index', {
                               user,
                               isHousehold
                         });
@@ -52,7 +52,7 @@ router.get('/new', (req, res) => {
       }
 })
 
-//view
+//show
 router.get('/:mealId', (req, res) => {
       const isHousehold = ('true' === req.params.isHousehold);
 
@@ -62,7 +62,7 @@ router.get('/:mealId', (req, res) => {
             Households.findById(userId)
                   .then((user) => {
                         const meal = user.meals.id(mealId);
-                        res.render('meals/view', {
+                        res.render('meals/show', {
                               meal,
                               ingredients: meal.ingredients,
                               userId,
@@ -74,7 +74,7 @@ router.get('/:mealId', (req, res) => {
             Users.findById(userId)
                   .then((user) => {
                         const meal = user.meals.id(mealId);
-                        res.render('meals/view', {
+                        res.render('meals/show', {
                               meal,
                               ingredients: meal.ingredients,
                               userId,

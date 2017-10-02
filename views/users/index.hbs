@@ -1,10 +1,11 @@
 <h1>Users</h1>
 <hr>
 {{#each users}}
-<div>
+<div class='main'>
    <h1><a href='/users/{{this._id}}/'>{{this.name}}</a></h1>
-   <a href="/users/{{this._id}}/false/meals">{{this.name}}'s Meals</a>
-   <a href="/users/{{this._id}}/delete">Delete User</a>
+   <h2><a href="/users/{{this._id}}/false/meals">{{this.name}}'s Meals</a></h2>
+   <h4><a href="/users/{{this._id}}/delete">Delete User</a></h4>
 </div>
 <hr>
 {{/each}}
+<h3><a href="/users/new">Create user</a></h3>

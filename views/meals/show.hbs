@@ -1,44 +1,31 @@
-<h1>{{user.name}}</h1>
-
-{{#if isHousehold}}
-   <a href="/households/{{user._id}}/true/meals/new">Add</a>
-{{else}}
-   <a href="/users/{{user._id}}/false/meals/new">Add</a>
-{{/if}}
-
+<h1>{{meal.name}}</h1>
 <hr>
-
-
-{{#each user.meals}}
-
 <div>
-   <h1>{{this.name}} for {{this.meal}} on {{this.day}}</h1>
-   {{#if this.chef}}
-      <h2>Cooked by {{this.chef}}</h2>
+   <h1>{{meal.meal}} on {{meal.day}}</h1>
+   {{#if meal.chef}}
+      <h2>Cooked by {{meal.chef}}</h2>
    {{/if}}
-   Ingredients:
+   <h3>Ingredients:</h3>
    <ul>
-      {{#each this.ingredients}}
+      {{#each ingredients}}
          <li>
             {{this}}
          </li>
       {{/each}}
    </ul>
 
-   {{#if ../isHousehold}}
-      <a href="/households/{{../user._id}}/true/meals/{{this._id}}">View</a>
-      <a href="/households/{{../user._id}}/true/meals/{{this._id}}/delete">Remove</a>
-   {{else}}
-      <a href="/users/{{../user._id}}/false/meals/{{this._id}}">View</a>
-      <a href="/users/{{../user._id}}/false/meals/{{this._id}}/delete">Remove</a>
-   {{/if}}
-
-</div>
-<hr>
-{{/each}}
-<br><br>
 {{#if isHousehold}}
-<a href="/households/">Back to households</a>
+   <a href="/households/{{userId}}/true/meals/{{meal._id}}/edit">Edit</a>
+   <a href="/households/{{userId}}/true/meals/{{meal._id}}/delete">Remove</a>
+</div>
+   <hr>
+   <a href="/households/{{userId}}/true/meals">back</a>
+
 {{else}}
-<a href="/users/">Back to users</a>
+
+   <a href="/users/{{userId}}/false/meals/{{meal._id}}/edit">Edit</a>
+   <a href="/users/{{userId}}/false/meals/{{meal._id}}/delete">Remove</a>
+</div>
+   <hr>
+   <a href="/users/{{userId}}/false/meals">back</a>
 {{/if}}

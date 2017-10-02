@@ -1,0 +1,53 @@
+
+{{#if isHousehold}}
+   <h1><a class='first' href="/households/{{user._id}}">{{user.name}}</a></h1>
+   <h3><a href="/households/{{user._id}}/true/meals/new">Add Meal</a></h3>
+{{else}}
+   <h1><a class='first' href="/users/{{user._id}}">{{user.name}}</a></h1>
+   <h3><a href="/users/{{user._id}}/false/meals/new">Add Meal</a></h3>
+{{/if}}
+
+<hr>
+
+
+{{#each user.meals}}
+
+<div>
+   <h1>
+
+   {{#if ../isHousehold}}
+      <a href="/households/{{../user._id}}/true/meals/{{this._id}}">{{this.name}}</a>
+   {{else}}
+      <a href="/users/{{../user._id}}/false/meals/{{this._id}}">{{this.name}}</a>
+   {{/if}}
+   
+   for {{this.meal}} on {{this.day}}
+   </h1>
+   {{#if this.chef}}
+      <h2>Cooked by {{this.chef}}</h2>
+   {{/if}}
+
+   {{!-- Ingredients:
+   <ul>
+      {{#each this.ingredients}}
+         <li>
+            {{this}}
+         </li>
+      {{/each}}
+   </ul> --}}
+
+   {{#if ../isHousehold}}
+      <h4><a href="/households/{{../user._id}}/true/meals/{{this._id}}/delete">Remove</a></h4>
+   {{else}}
+      <h4><a href="/users/{{../user._id}}/false/meals/{{this._id}}/delete">Remove</a></h4>
+   {{/if}}
+
+</div>
+<hr>
+{{/each}}
+<br><br>
+{{#if isHousehold}}
+   <h3><a href="/households/">Back to households</a></h3>
+{{else}}
+   <h3><a href="/users/">Back to users</a></h3>
+{{/if}}
