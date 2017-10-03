@@ -36,6 +36,7 @@ div{
 }
 
 h1, h1 .first{
+  text-shadow: 1px 1px 0px black;
   color: #520050;
 }
 
