@@ -12,7 +12,7 @@ All models and routes have full CRUD functionality.
 ![ERD image](/ERD.png?raw=true)
 
 ### Wireframe
-In this repo, saved as [Wireframe.pdf](/Wireframe.pdf?raw=true)
+In this repo, saved as [Wireframe.pdf](https://github.com/RedKing7/meal_planner/blob/master/Wireframe.pdf)
 
 ### Trello board
 [Here](https://trello.com/b/vvr2TCBI/project-2)
