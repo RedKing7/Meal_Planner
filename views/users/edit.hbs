@@ -1,10 +1,10 @@
 <h1>Edit User</h1>
 <form action="/users/{{user._id}}?_method=PUT" method='POST'>
    <label for="name">Name: </label>
-   <input type="text" name='name' value="{{user.name}}">
+   <input type="text" name='name' value="{{user.name}}" required='true'>
    <br>
    <label for="username">Username: </label>
-   <input type="text" name='username' value="{{user.username}}">
+   <input type="text" name='username' value="{{user.username}}" required='true'>
    <br>
    <button type='submit'>Update</button>
 </form>
